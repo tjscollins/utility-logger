@@ -10,4 +10,10 @@ describe('NodeLogger', () => {
     expect(logger.mode).toBe(MODE.file);
     expect(logger.logFile).toBe('jest.log');
   });
+
+  it('should set mode = MODE.console', () => {
+    const logger = new NodeLogger({ mode: 'console' });
+    expect(logger.mode).toBe(MODE.console);
+    expect(logger.logFile).toBe(undefined);
+  });
 });
