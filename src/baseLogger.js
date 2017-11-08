@@ -1,5 +1,5 @@
 import colors from 'colors';
-import { LEVEL } from './constants';
+import { LEVEL, COLOR } from './constants';
 
 
 export default class BaseLogger {
@@ -44,16 +44,16 @@ export default class BaseLogger {
 
     switch (level) {
       case LEVEL.error:
-        logString = colors.red(`ERROR: ${timestamp}\n${data.reduce(this._stringify, '')}`);
+        logString = colors[COLOR.error](`ERROR: ${timestamp}\n${data.reduce(this._stringify, '')}`);
         break;
       case LEVEL.info:
-        logString = colors.green(`INFO: ${timestamp}\n${data.reduce(this._stringify, '')}`);
+        logString = colors[COLOR.info](`INFO: ${timestamp}\n${data.reduce(this._stringify, '')}`);
         break;
       case LEVEL.debug:
-        logString = colors.cyan(`DEBUG: ${timestamp}\n${data.reduce(this._stringify, '')}`);
+        logString = colors[COLOR.debug](`DEBUG: ${timestamp}\n${data.reduce(this._stringify, '')}`);
         break;
       case LEVEL.log:
-        logString = `LOG: ${timestamp}\n${data.reduce(this._stringify, '')}`;
+        logString = colors[COLOR.log](`LOG: ${timestamp}\n${data.reduce(this._stringify, '')}`);
         break;
       default:
         break;
