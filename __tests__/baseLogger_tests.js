@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 import colors from 'colors';
 import sinon from 'sinon';
 
@@ -29,7 +30,7 @@ describe('BaseLogger', () => {
     }
   });
 
-  describe('BaseLogger.consoleFormat', () => {
+  describe('BaseLogger._consoleFormat', () => {
     it('should format BaseLoggerr.log logging correctly', () => {
       const logger = new BaseLogger({ level: 'debug' });
       expect(logger._consoleFormat(['test'], LEVEL.log)).toBe(`LOG: ${Date()}\n\ttest\n\n`);
@@ -51,79 +52,32 @@ describe('BaseLogger', () => {
     });
   });
 
-  describe('Baselogger.log', () => {
-    let consoleStub;
+  describe('Baselogger.log', testLoggerMethod('log'));
 
-    beforeEach(() => {
-      consoleStub = sinon.stub(console, 'log');
-    });
+  describe('Baselogger.error', testLoggerMethod('error'));
 
-    afterEach(() => {
-      consoleStub.restore();
-    });
+  describe('Baselogger.info', testLoggerMethod('info'));
 
-    it('should invoke console.log', () => {
-      const logger = new BaseLogger({ level: 'debug' });
-      logger.log('Test');
-
-      expect(console.log.calledOnce).toBe(true);
-    });
-  });
-
-  describe('Baselogger.error', () => {
-    let consoleStub;
-
-    beforeEach(() => {
-      consoleStub = sinon.stub(console, 'log');
-    });
-
-    afterEach(() => {
-      consoleStub.restore();
-    });
-
-    it('should invoke console.log', () => {
-      const logger = new BaseLogger({ level: 'debug' });
-      logger.error('Test');
-
-      expect(console.log.calledOnce).toBe(true);
-    });
-  });
-
-  describe('Baselogger.info', () => {
-    let consoleStub;
-
-    beforeEach(() => {
-      consoleStub = sinon.stub(console, 'log');
-    });
-
-    afterEach(() => {
-      consoleStub.restore();
-    });
-
-    it('should invoke console.log', () => {
-      const logger = new BaseLogger({ level: 'debug' });
-      logger.info('Test');
-
-      expect(console.log.calledOnce).toBe(true);
-    });
-  });
-
-  describe('Baselogger.debug', () => {
-    let consoleStub;
-
-    beforeEach(() => {
-      consoleStub = sinon.stub(console, 'log');
-    });
-
-    afterEach(() => {
-      consoleStub.restore();
-    });
-
-    it('should invoke console.log', () => {
-      const logger = new BaseLogger({ level: 'debug' });
-      logger.debug('Test');
-
-      expect(console.log.calledOnce).toBe(true);
-    });
-  });
+  describe('Baselogger.debug', testLoggerMethod('debug'));
 });
+
+function testLoggerMethod(level) {
+  return () => {
+    let consoleStub;
+
+    beforeEach(() => {
+      consoleStub = sinon.stub(console, 'log');
+    });
+
+    afterEach(() => {
+      consoleStub.restore();
+    });
+
+    it('should invoke console.log', () => {
+      const logger = new BaseLogger({ level });
+      logger[level]('Test');
+
+      expect(console.log.calledOnce).toBe(true);
+    });
+  };
+}
