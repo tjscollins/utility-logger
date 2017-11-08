@@ -8,9 +8,9 @@
 export const LEVEL = Object.freeze({
   quiet: 0,
   log: 1,
-  error: 1,
-  info: 2,
-  debug: 3,
+  error: 2,
+  info: 3,
+  debug: 4,
 });
 
 /**
