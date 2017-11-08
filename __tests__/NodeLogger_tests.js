@@ -20,7 +20,25 @@ describe('NodeLogger', () => {
   });
 
   describe('NodeLogger._fileFormat', () => {
+    it('should format NodeLogger.log logging correctly', () => {
+      const logger = new NodeLogger({ level: 'debug', mode: 'file' });
+      expect(logger._fileFormat(['test'], LEVEL.log)).toBe(`LOG: ${Date()}\n\ttest\n\n`);
+    });
 
+    it('should format NodeLogger.error logging correctly', () => {
+      const logger = new NodeLogger({ level: 'debug', mode: 'file' });
+      expect(logger._fileFormat(['test'], LEVEL.error)).toBe(`ERROR: ${Date()}\n\ttest\n\n`);
+    });
+
+    it('should format NodeLogger.info logging correctly', () => {
+      const logger = new NodeLogger({ level: 'debug', mode: 'file' });
+      expect(logger._fileFormat(['test'], LEVEL.info)).toBe(`INFO: ${Date()}\n\ttest\n\n`);
+    });
+
+    it('should format NodeLogger.debug logging correctly', () => {
+      const logger = new NodeLogger({ level: 'debug', mode: 'file' });
+      expect(logger._fileFormat(['test'], LEVEL.debug)).toBe(`DEBUG: ${Date()}\n\ttest\n\n`);
+    });
   });
 
   describe('NodeLogger.log', testLoggerMethod('log'));
