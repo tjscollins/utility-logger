@@ -2,7 +2,7 @@
   "name": "utility-logger",
   "version": "0.1.0",
   "description": "A highly configurable logging utility for both nodejs and browser environments",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "jest"
   },
