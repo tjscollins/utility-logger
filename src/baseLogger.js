@@ -10,25 +10,35 @@ export default class BaseLogger {
     this.level = LEVEL[level];
   }
 
-  /* eslint-disable no-console */
   log(...args) {
-    console.log(...this.consoleFormat(args, LEVEL.log));
+    console.log(...this._consoleFormat(args, LEVEL.log));
   }
 
   error(...args) {
-    console.log(...this.consoleFormat(args, LEVEL.error));
+    console.log(...this._consoleFormat(args, LEVEL.error));
   }
 
   info(...args) {
-    console.log(...this.consoleFormat(args, LEVEL.info));
+    console.log(...this._consoleFormat(args, LEVEL.info));
   }
 
   debug(...args) {
-    console.log(...this.consoleFormat(args, LEVEL.debug));
+    console.log(...this._consoleFormat(args, LEVEL.debug));
   }
 
 
-  consoleFormat(data, level) {
+  /* ------Private Methods-------- */
+  /* eslint-disable class-methods-use-this */
+
+  /**
+   * Format data into the correct string format based on log level
+   *
+   * @param {any} data
+   * @param {LEVEL} level
+   * @returns
+   * @memberof BaseLogger
+   */
+  _consoleFormat(data, level) {
     const timestamp = Date();
     let logString;
 
@@ -43,7 +53,7 @@ export default class BaseLogger {
         logString = colors.cyan(`DEBUG: ${timestamp}\n${data.reduce(this._stringify, '')}`);
         break;
       case LEVEL.log:
-        logString = `LOG: ${timestamp}\n\t${data.reduce(this._stringify, '')}`;
+        logString = `LOG: ${timestamp}\n${data.reduce(this._stringify, '')}`;
         break;
       default:
         break;
@@ -51,11 +61,7 @@ export default class BaseLogger {
 
     return logString;
   }
-  /* eslint-enable no-console */
 
-
-  /* ------Private Methods-------- */
-  /* eslint-disable class-methods-use-this */
   /**
    * Private reducer to stringify an array of items
    *
