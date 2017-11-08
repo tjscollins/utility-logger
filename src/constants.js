@@ -32,10 +32,10 @@ export const MODE = Object.freeze({
  * @enum {number}
  */
 export const COLOR = Object.freeze({
-  log: 'white',
-  error: 'red',
-  info: 'green',
-  debug: 'cyan',
+  [LEVEL.log]: 'white',
+  [LEVEL.error]: 'red',
+  [LEVEL.info]: 'green',
+  [LEVEL.debug]: 'cyan',
 });
 
 

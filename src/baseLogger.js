@@ -44,16 +44,16 @@ export default class BaseLogger {
 
     switch (level) {
       case LEVEL.error:
-        logString = colors[COLOR.error](`ERROR: ${timestamp}\n${data.reduce(this._stringify, '')}`);
+        logString = colors[COLOR[LEVEL.error]](`ERROR: ${timestamp}\n${data.reduce(this._stringify, '')}`);
         break;
       case LEVEL.info:
-        logString = colors[COLOR.info](`INFO: ${timestamp}\n${data.reduce(this._stringify, '')}`);
+        logString = colors[COLOR[LEVEL.info]](`INFO: ${timestamp}\n${data.reduce(this._stringify, '')}`);
         break;
       case LEVEL.debug:
-        logString = colors[COLOR.debug](`DEBUG: ${timestamp}\n${data.reduce(this._stringify, '')}`);
+        logString = colors[COLOR[LEVEL.debug]](`DEBUG: ${timestamp}\n${data.reduce(this._stringify, '')}`);
         break;
       case LEVEL.log:
-        logString = colors[COLOR.log](`LOG: ${timestamp}\n${data.reduce(this._stringify, '')}`);
+        logString = colors[COLOR[LEVEL.log]](`LOG: ${timestamp}\n${data.reduce(this._stringify, '')}`);
         break;
       default:
         break;
