@@ -42,7 +42,7 @@ export const COLOR = Object.freeze({
 export const DEFAULT_NODE_OPTS = Object.freeze({
   level: 'error',
   mode: 'console',
-  logFile: undefined,
+  logFile: 'logFile.log',
 });
 
 export const DEFAULT_BROWSER_OPTS = Object.freeze({
