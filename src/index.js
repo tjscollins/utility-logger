@@ -1,6 +1,6 @@
-import nodeLogger from './nodeLogger';
-import browserLogger from './browserLogger';
+import NodeLogger from './NodeLogger';
+import BrowserLogger from './BrowserLogger';
 
-const Logger = process ? nodeLogger : browserLogger;
+const Logger = (typeof process !== 'undefined') && (process.release.name === 'node') ? NodeLogger : BrowserLogger;
 
 export default Logger;
