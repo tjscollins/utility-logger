@@ -1,27 +1,129 @@
-import BaseLogger, { LEVEL } from '../src/baseLogger';
+import colors from 'colors';
+import sinon from 'sinon';
+
+import BaseLogger from '../src/BaseLogger';
+import { LEVEL } from '../src/constants';
 
 describe('BaseLogger', () => {
-    it('should configure itself with supplied log level', () => {
-        let logger = new BaseLogger('quiet');
-        expect(logger.level).toBe(LEVEL.quiet);
+  it('should configure itself with supplied log level', () => {
+    let logger = new BaseLogger({ level: 'quiet' });
+    expect(logger.level).toBe(LEVEL.quiet);
 
-        logger = new BaseLogger('error');
-        expect(logger.level).toBe(LEVEL.error);
-        
-        logger = new BaseLogger('info');
-        expect(logger.level).toBe(LEVEL.info);
-        
-        logger = new BaseLogger('debug');
-        expect(logger.level).toBe(LEVEL.debug);
+    logger = new BaseLogger({ level: 'error' });
+    expect(logger.level).toBe(LEVEL.error);
+
+    logger = new BaseLogger({ level: 'info' });
+    expect(logger.level).toBe(LEVEL.info);
+
+    logger = new BaseLogger({ level: 'debug' });
+    expect(logger.level).toBe(LEVEL.debug);
+  });
+
+  it('should throw an error if used with invalid log level', (done) => {
+    try {
+      const logger = new BaseLogger({ level: 'test' });
+      done(Error('BaseLogger did not throw an error when called with invalid log level.'));
+    } catch (err) {
+      expect(err).toBeInstanceOf(Error);
+      done();
+    }
+  });
+
+  describe('BaseLogger.consoleFormat', () => {
+    it('should format BaseLoggerr.log logging correctly', () => {
+      const logger = new BaseLogger({ level: 'debug' });
+      expect(logger._consoleFormat(['test'], LEVEL.log)).toBe(`LOG: ${Date()}\n\ttest\n\n`);
     });
 
-    it('should throw an error if used with invalid log level', (done) => {
-        try {
-            let logger = new BaseLogger('test');
-            done(Error('BaseLogger did not throw an error when called with invalid log level.'));
-        } catch (err) {
-            expect(err).toBeInstanceOf(Error);
-            done();
-        }
+    it('should format BaseLoggerr.error logging correctly', () => {
+      const logger = new BaseLogger({ level: 'debug' });
+      expect(logger._consoleFormat(['test'], LEVEL.error)).toBe(colors.red(`ERROR: ${Date()}\n\ttest\n\n`));
     });
+
+    it('should format BaseLoggerr.info logging correctly', () => {
+      const logger = new BaseLogger({ level: 'debug' });
+      expect(logger._consoleFormat(['test'], LEVEL.info)).toBe(colors.green(`INFO: ${Date()}\n\ttest\n\n`));
+    });
+
+    it('should format BaseLoggerr.debug logging correctly', () => {
+      const logger = new BaseLogger({ level: 'debug' });
+      expect(logger._consoleFormat(['test'], LEVEL.debug)).toBe(colors.cyan(`DEBUG: ${Date()}\n\ttest\n\n`));
+    });
+  });
+
+  describe('Baselogger.log', () => {
+    let consoleStub;
+
+    beforeEach(() => {
+      consoleStub = sinon.stub(console, 'log');
+    });
+
+    afterEach(() => {
+      consoleStub.restore();
+    });
+
+    it('should invoke console.log', () => {
+      const logger = new BaseLogger({ level: 'debug' });
+      logger.log('Test');
+
+      expect(console.log.calledOnce).toBe(true);
+    });
+  });
+
+  describe('Baselogger.error', () => {
+    let consoleStub;
+
+    beforeEach(() => {
+      consoleStub = sinon.stub(console, 'log');
+    });
+
+    afterEach(() => {
+      consoleStub.restore();
+    });
+
+    it('should invoke console.log', () => {
+      const logger = new BaseLogger({ level: 'debug' });
+      logger.error('Test');
+
+      expect(console.log.calledOnce).toBe(true);
+    });
+  });
+
+  describe('Baselogger.info', () => {
+    let consoleStub;
+
+    beforeEach(() => {
+      consoleStub = sinon.stub(console, 'log');
+    });
+
+    afterEach(() => {
+      consoleStub.restore();
+    });
+
+    it('should invoke console.log', () => {
+      const logger = new BaseLogger({ level: 'debug' });
+      logger.info('Test');
+
+      expect(console.log.calledOnce).toBe(true);
+    });
+  });
+
+  describe('Baselogger.debug', () => {
+    let consoleStub;
+
+    beforeEach(() => {
+      consoleStub = sinon.stub(console, 'log');
+    });
+
+    afterEach(() => {
+      consoleStub.restore();
+    });
+
+    it('should invoke console.log', () => {
+      const logger = new BaseLogger({ level: 'debug' });
+      logger.debug('Test');
+
+      expect(console.log.calledOnce).toBe(true);
+    });
+  });
 });
