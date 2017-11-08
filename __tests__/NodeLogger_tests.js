@@ -1,5 +1,4 @@
 /* eslint-disable no-use-before-define */
-import colors from 'colors';
 import sinon from 'sinon';
 import fs from 'fs';
 
