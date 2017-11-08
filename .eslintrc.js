@@ -9,6 +9,7 @@ module.exports = {
         "no-restricted-syntax": "off",
         "no-await-in-loop": "off",
         "no-underscore-dangle": "off",
-        "no-console": "off"
+        "no-console": "off",
+        "one-var": "off",
     }
 };
