@@ -1,6 +1,7 @@
 import colors from 'colors';
 import { LEVEL } from './constants';
 
+
 export default class BaseLogger {
   constructor({ level }) {
     if (Object.keys(LEVEL).indexOf(level) < 0) {
@@ -10,7 +11,6 @@ export default class BaseLogger {
   }
 
   /* eslint-disable no-console */
-  /* eslint-disable class-methods-use-this */
   log(...args) {
     console.log(...this.consoleFormat(args, LEVEL.log));
   }
@@ -27,29 +27,44 @@ export default class BaseLogger {
     console.log(...this.consoleFormat(args, LEVEL.debug));
   }
 
+
   consoleFormat(data, level) {
     const timestamp = Date();
     let logString;
-    const stringify = (acc, next) => `${acc}\n\n\t${next}`;
 
     switch (level) {
       case LEVEL.error:
-        logString = colors.red(`ERROR: ${timestamp}\n\t${data.reduce(stringify, '')}`);
+        logString = colors.red(`ERROR: ${timestamp}\n${data.reduce(this._stringify, '')}`);
         break;
       case LEVEL.info:
-        logString = colors.green(`INFO: ${timestamp}\n\t${data.reduce(stringify, '')}`);
+        logString = colors.green(`INFO: ${timestamp}\n${data.reduce(this._stringify, '')}`);
         break;
       case LEVEL.debug:
-        logString = colors.cyan(`DEBUG: ${timestamp}\n\t${data.reduce(stringify, '')}`);
+        logString = colors.cyan(`DEBUG: ${timestamp}\n${data.reduce(this._stringify, '')}`);
         break;
       case LEVEL.log:
-        logString = `LOG: ${timestamp}\n\t${data.reduce(stringify, '')}`;
+        logString = `LOG: ${timestamp}\n\t${data.reduce(this._stringify, '')}`;
         break;
       default:
         break;
     }
-    console.log(logString);
+
+    return logString;
+  }
+  /* eslint-enable no-console */
+
+
+  /* ------Private Methods-------- */
+  /* eslint-disable class-methods-use-this */
+  /**
+   * Private reducer to stringify an array of items
+   *
+   * @param {string} acc
+   * @param {any} next
+   * @returns
+   */
+  _stringify(acc, next) {
+    return `${acc}\t${next}\n\n`;
   }
   /* eslint-enable class-methods-use-this */
-  /* eslint-enable no-console */
 }
