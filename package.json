@@ -1,6 +1,6 @@
 {
   "name": "utility-logger",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A highly configurable logging utility for both nodejs and browser environments.  Allows logging to console, file (for node environment) or configurable DOM overlay (for browser).",
   "main": "dist/index.js",
   "scripts": {
