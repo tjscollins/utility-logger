@@ -63,21 +63,31 @@ describe('BaseLogger', () => {
 
 function testLoggerMethod(level) {
   return () => {
-    let consoleStub;
+    let logStub;
+    let errorStub;
+    let infoStub;
+    let debugStub;
 
     beforeEach(() => {
-      consoleStub = sinon.stub(console, 'log');
+      logStub = sinon.stub(console, 'log');
+      errorStub = sinon.stub(console, 'error');
+      infoStub = sinon.stub(console, 'info');
+      debugStub = sinon.stub(console, 'warn');
     });
 
     afterEach(() => {
-      consoleStub.restore();
+      logStub.restore();
+      errorStub.restore();
+      infoStub.restore();
+      debugStub.restore();
     });
 
     it('should invoke console.log', () => {
       const logger = new BaseLogger({ level });
       logger[level]('Test');
 
-      expect(console.log.calledOnce).toBe(true);
+      const consoleMethod = level === 'debug' ? 'warn' : level;
+      expect(console[consoleMethod].calledOnce).toBe(true);
     });
   };
 }

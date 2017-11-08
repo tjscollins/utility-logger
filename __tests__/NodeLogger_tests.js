@@ -52,16 +52,25 @@ describe('NodeLogger', () => {
 
 function testLoggerMethod(level) {
   return () => {
-    let consoleStub,
-      fsStub;
+    let logStub;
+    let errorStub;
+    let infoStub;
+    let debugStub;
+    let fsStub;
 
     beforeEach(() => {
-      consoleStub = sinon.stub(console, 'log');
+      logStub = sinon.stub(console, 'log');
+      errorStub = sinon.stub(console, 'error');
+      infoStub = sinon.stub(console, 'info');
+      debugStub = sinon.stub(console, 'warn');
       fsStub = sinon.stub(fs, 'appendFile');
     });
 
     afterEach(() => {
-      consoleStub.restore();
+      logStub.restore();
+      errorStub.restore();
+      infoStub.restore();
+      debugStub.restore();
       fsStub.restore();
     });
 
@@ -71,17 +80,19 @@ function testLoggerMethod(level) {
       expect(console.log.called).toBe(false);
       logger.level = LEVEL[level];
       logger[level]('test');
-      expect(console.log.called).toBe(true);
+      const consoleMethod = level === 'debug' ? 'warn' : level;
+      expect(console[consoleMethod].called).toBe(true);
     });
 
     it('should switch based on logging mode', () => {
       const logger = new NodeLogger({ level, mode: 'console' });
       logger[level]('test');
-      expect(console.log.calledOnce).toBe(true);
+      const consoleMethod = level === 'debug' ? 'warn' : level;
+      expect(console[consoleMethod].calledOnce).toBe(true);
       expect(fs.appendFile.calledOnce).toBe(false);
       logger.mode = MODE.file;
       logger[level]('test');
-      expect(console.log.calledOnce).toBe(true);
+      expect(console[consoleMethod].calledOnce).toBe(true);
       expect(fs.appendFile.calledOnce).toBe(true);
     });
   };
