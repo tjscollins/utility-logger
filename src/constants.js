@@ -1,3 +1,4 @@
+
 /**
  * Enum for logging levels
  *
@@ -21,4 +22,11 @@ export const LEVEL = Object.freeze({
 export const MODE = Object.freeze({
   console: 0,
   file: 1,
+});
+
+
+export const DEFAULT_NODE_OPTS = Object.freeze({
+  level: 'error',
+  mode: 'console',
+  logFile: undefined,
 });
