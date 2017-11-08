@@ -15,15 +15,15 @@ export default class BaseLogger {
   }
 
   error(...args) {
-    console.log(...this._consoleFormat(args, LEVEL.error));
+    console.error(...this._consoleFormat(args, LEVEL.error));
   }
 
   info(...args) {
-    console.log(...this._consoleFormat(args, LEVEL.info));
+    console.info(...this._consoleFormat(args, LEVEL.info));
   }
 
   debug(...args) {
-    console.log(...this._consoleFormat(args, LEVEL.debug));
+    console.warn(...this._consoleFormat(args, LEVEL.debug));
   }
 
 
