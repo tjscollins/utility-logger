@@ -1,17 +1,23 @@
 {
   "name": "utility-logger",
   "version": "0.1.0",
-  "description": "A highly configurable logging utility for both nodejs and browser environments",
+  "description": "A highly configurable logging utility for both nodejs and browser environments.  Allows logging to console, file (for node environment) or configurable DOM overlay (for browser).",
   "main": "dist/index.js",
   "scripts": {
     "build": "NODE_ENV=production node_modules/rollup/bin/rollup -c rollup.config.js",
     "test": "jest"
   },
   "keywords": [
-    "logging"
+    "logging",
+    "debug",
+    "debugging"
   ],
   "author": "Tyler Collins",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tjscollins/utility-logger.git"
+  },
   "dependencies": {
     "colors": "^1.1.2"
   },
