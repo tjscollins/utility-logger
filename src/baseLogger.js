@@ -1,39 +1,55 @@
 import colors from 'colors';
+import { LEVEL } from './constants';
 
-const LEVEL = Object.freeze({
-    quiet: 0,
-    error: 1,
-    info: 2,
-    debug: 3,
-    log: 4,
-});
+export default class BaseLogger {
+  constructor({ level }) {
+    if (Object.keys(LEVEL).indexOf(level) < 0) {
+      throw new TypeError(`Invalid log level ${level}`);
+    }
+    this.level = LEVEL[level];
+  }
 
-class baseLogger {
-    constructor(logLevel) {
-        this.level = LEVEL[loglevel];
-    }
+  /* eslint-disable no-console */
+  /* eslint-disable class-methods-use-this */
+  log(...args) {
+    console.log(...this.consoleFormat(args, LEVEL.log));
+  }
 
-    log (...args) {
-        console.log(...this.format(args, LEVEL.log));
-    }
-    
-    error (...args) {
-        console.log(...this.format(args, LEVEL.error));
-    }
-        
-    info (...args) {
-        console.log(...this.format(args, LEVEL.info));
-    }
-    
-    debug (...args) {
-        console.log(...this.format(args, LEVEL.debug));
-    }
+  error(...args) {
+    console.log(...this.consoleFormat(args, LEVEL.error));
+  }
 
-    format(data, level) {
-        if (LEVEL.values().indexOf(level) < 0) {
-            throw new Error('Invalid log level');
-        }
+  info(...args) {
+    console.log(...this.consoleFormat(args, LEVEL.info));
+  }
 
+  debug(...args) {
+    console.log(...this.consoleFormat(args, LEVEL.debug));
+  }
+
+  consoleFormat(data, level) {
+    const timestamp = Date();
+    let logString;
+    const stringify = (acc, next) => `${acc}\n\n\t${next}`;
+
+    switch (level) {
+      case LEVEL.error:
+        logString = colors.red(`ERROR: ${timestamp}\n\t${data.reduce(stringify, '')}`);
+        break;
+      case LEVEL.info:
+        logString = colors.green(`INFO: ${timestamp}\n\t${data.reduce(stringify, '')}`);
+        break;
+      case LEVEL.debug:
+        logString = colors.cyan(`DEBUG: ${timestamp}\n\t${data.reduce(stringify, '')}`);
+        break;
+      case LEVEL.log:
+        logString = `LOG: ${timestamp}\n\t${data.reduce(stringify, '')}`;
+        break;
+      default:
+        break;
     }
-
+    console.log(logString);
+  }
+  /* eslint-enable class-methods-use-this */
+  /* eslint-enable no-console */
 }
