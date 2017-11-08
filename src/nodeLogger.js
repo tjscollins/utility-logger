@@ -1,9 +1,9 @@
-import baseLogger from 'baseLogger';
 import fs from 'fs';
 
+import BaseLogger from './BaseLogger';
 import { LEVEL, MODE } from './constants';
 
-class nodeLogger extends baseLogger {
+export default class nodeLogger extends baseLogger {
   constructor(opts) {
     super(opts.level);
 
@@ -18,7 +18,30 @@ class nodeLogger extends baseLogger {
     }
   }
 
-  fileFormat(data, level) {}
+  fileFormat(data, level) {
+    const timestamp = Date();
+    let logString;
+
+    switch (level) {
+      case LEVEL.error:
+        logString = `ERROR: ${timestamp}\n`;
+        break;
+      case LEVEL.info:
+        logString = `INFO: ${timestamp}\n`;
+        break;
+      case LEVEL.debug:
+        logString = `DEBUG: ${timestamp}\n`;
+        break;
+      case LEVEL.log:
+        logString = `LOG: ${timestamp}\n`;
+        break;
+      default:
+        break;
+    }
+
+    logString += data.reduce(this._stringify, '');
+    return logString;
+  }
 
   log(...args) {
     switch (this.mode) {
