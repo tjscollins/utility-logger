@@ -6,7 +6,7 @@ export const LEVEL = Object.freeze({
     log: 4,
 });
 
-const MODE = Object.freeze({
+export const MODE = Object.freeze({
     console: 0,
     file: 1,
 });
