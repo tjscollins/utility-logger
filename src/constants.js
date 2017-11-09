@@ -35,7 +35,7 @@ export const COLOR = Object.freeze({
   [LEVEL.log]: 'white',
   [LEVEL.error]: 'red',
   [LEVEL.info]: 'green',
-  [LEVEL.debug]: 'cyan',
+  [LEVEL.debug]: 'magenta',
 });
 
 
