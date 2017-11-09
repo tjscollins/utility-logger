@@ -1,5 +1,4 @@
 import fs from 'fs';
-import path from 'path';
 
 import BaseLogger from './BaseLogger';
 import { LEVEL, MODE, DEFAULT_NODE_OPTS } from './constants';
@@ -10,13 +9,14 @@ export default class nodeLogger extends BaseLogger {
     super(options);
 
     if (options.mode !== undefined && Object.keys(MODE).indexOf(options.mode) < 0) {
-      throw new TypeError(`Invalid log mode ${options.mode}`);
+      throw new TypeError(`Invalid log mode for NodeLogger ${options.modeName}`);
     }
 
-    this.mode = MODE[options.mode];
+    this.modeName = options.mode;
+    this.mode = MODE[this.modeName];
 
     if (this.mode === MODE.file) {
-      this.logFile = options.logFile || `${path.basename(process.argv[1])}.log`;
+      this.logFile = options.logFile;
     }
   }
 
@@ -30,7 +30,7 @@ export default class nodeLogger extends BaseLogger {
           fs.appendFile(this.logFile, this._fileFormat(args, LEVEL.log));
           break;
         default:
-          throw new TypeError(`Invalid log mode ${this.mode}`);
+          throw new TypeError(`Invalid log mode for NodeLogger ${this.modeName}`);
       }
     }
   }
@@ -45,7 +45,7 @@ export default class nodeLogger extends BaseLogger {
           fs.appendFile(this.logFile, this._fileFormat(args, LEVEL.error));
           break;
         default:
-          throw new TypeError(`Invalid log mode ${this.mode}`);
+          throw new TypeError(`Invalid log mode for NodeLogger ${this.modeName}`);
       }
     }
   }
@@ -60,7 +60,7 @@ export default class nodeLogger extends BaseLogger {
           fs.appendFile(this.logFile, this._fileFormat(args, LEVEL.info));
           break;
         default:
-          throw new TypeError(`Invalid log mode ${this.mode}`);
+          throw new TypeError(`Invalid log mode for NodeLogger ${this.modeName}`);
       }
     }
   }
@@ -75,7 +75,7 @@ export default class nodeLogger extends BaseLogger {
           fs.appendFile(this.logFile, this._fileFormat(args, LEVEL.debug));
           break;
         default:
-          throw new TypeError(`Invalid log mode ${this.mode}`);
+          throw new TypeError(`Invalid log mode for NodeLogger ${this.modeName}`);
       }
     }
   }
