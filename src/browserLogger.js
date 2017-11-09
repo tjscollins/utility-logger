@@ -12,13 +12,15 @@ export default class BrowserLogger extends BaseLogger {
       throw new TypeError(`Invalid log mode ${options.mode}`);
     }
 
-    this.mode = MODE[options.mode];
+    this.modeName = options.mode;
+    this.mode = MODE[this.modeName];
 
     if (this.mode === MODE.overlay) {
       // Create and position overlay logging window
       this.overlay = document.createElement('div');
       this.overlay.setAttribute('id', 'logger-overlay');
-      this.overlay.setAttribute('style', 'position: fixed; bottom: 0; top: 200px; right: 0; width 250px; overflow-y: scroll; background-color: rgba(0,0,0,0.35); color: white;');
+      this.overlay.setAttribute('style', 'position: fixed; bottom: 0; top: 75%; right: 0; width 250px; overflow-y: scroll; background-color: rgba(0,0,0,0.45); color: white; padding: 5px 10px;');
+      document.getElementsByTagName('body')[0].appendChild(this.overlay);
     }
   }
 
@@ -34,7 +36,7 @@ export default class BrowserLogger extends BaseLogger {
           logEntry.setAttribute('style', `color: ${COLOR[LEVEL.log]}`);
           break;
         default:
-          throw new TypeError(`Invalid log mode for BrowserLogger: ${this.mode}`);
+          throw new TypeError(`Invalid log mode for BrowserLogger: ${this.modeName}`);
       }
       this.overlay.appendChild(logEntry);
     }
@@ -52,7 +54,7 @@ export default class BrowserLogger extends BaseLogger {
           logEntry.setAttribute('style', `color: ${COLOR[LEVEL.error]}`);
           break;
         default:
-          throw new TypeError(`Invalid log mode for BrowserLogger: ${this.mode}`);
+          throw new TypeError(`Invalid log mode for BrowserLogger: ${this.modeName}`);
       }
       this.overlay.appendChild(logEntry);
     }
@@ -70,7 +72,7 @@ export default class BrowserLogger extends BaseLogger {
           logEntry.setAttribute('style', `color: ${COLOR[LEVEL.info]}`);
           break;
         default:
-          throw new TypeError(`Invalid log mode for BrowserLogger: ${this.mode}`);
+          throw new TypeError(`Invalid log mode for BrowserLogger: ${this.modeName}`);
       }
       this.overlay.appendChild(logEntry);
     }
@@ -88,7 +90,7 @@ export default class BrowserLogger extends BaseLogger {
           logEntry.setAttribute('style', `color: ${COLOR[LEVEL.debug]}`);
           break;
         default:
-          throw new TypeError(`Invalid log mode for BrowserLogger: ${this.mode}`);
+          throw new TypeError(`Invalid log mode for BrowserLogger: ${this.modeName}`);
       }
       this.overlay.appendChild(logEntry);
     }
@@ -117,9 +119,9 @@ export default class BrowserLogger extends BaseLogger {
         break;
     }
 
-    const dataString = data.reduce(this._stringify, '');
-    dataString.replace('\n', '<br />');
-    dataString.replace('\t', '&emsp;');
+    let dataString = data.reduce(this._stringify, '');
+    dataString = dataString.replace('\n', '<br />');
+    dataString = dataString.replace('\t', '&emsp;');
     return logString + dataString;
   }
 }
