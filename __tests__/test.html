@@ -9,5 +9,12 @@
 <body>
     
     <script src="../dist/utility-logger.js"></script>
+    <script>
+        let log = new UtilityLogger({ level: 'debug' });
+        log.log('Basic forced log statement');
+        log.info('Informative content');
+        log.error('Oh no, something went horribly wrong.');
+        log.debug('Here\'s what I know about it...');
+    </script>
 </body>
 </html>
