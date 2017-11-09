@@ -33,7 +33,7 @@ describe('BaseLogger', () => {
   describe('BaseLogger._consoleFormat', () => {
     it('should format BaseLoggerr.log logging correctly', () => {
       const logger = new BaseLogger({ level: 'debug' });
-      expect(logger._consoleFormat(['test'], LEVEL.log)).toBe(`LOG: ${Date()}\n\ttest\n\n`);
+      expect(logger._consoleFormat(['test'], LEVEL.log)).toBe(colors.white(`LOG: ${Date()}\n\ttest\n\n`));
     });
 
     it('should format BaseLoggerr.error logging correctly', () => {

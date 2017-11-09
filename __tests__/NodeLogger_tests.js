@@ -9,7 +9,7 @@ describe('NodeLogger', () => {
   it('should set output mode = MODE.file and logFile', () => {
     const logger = new NodeLogger({ mode: 'file' });
     expect(logger.mode).toBe(MODE.file);
-    expect(logger.logFile).toBe('jest.log');
+    expect(logger.logFile).toBe('logFile.log');
   });
 
   it('should set mode = MODE.console', () => {
