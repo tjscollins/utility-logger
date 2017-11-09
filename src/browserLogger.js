@@ -34,11 +34,11 @@ export default class BrowserLogger extends BaseLogger {
         case MODE.overlay:
           logEntry.innerHTML = this._overlayFormat(args, LEVEL.log);
           logEntry.setAttribute('style', `color: ${COLOR[LEVEL.log]}`);
+          this.overlay.appendChild(logEntry);
           break;
         default:
           throw new TypeError(`Invalid log mode for BrowserLogger: ${this.modeName}`);
       }
-      this.overlay.appendChild(logEntry);
     }
   }
 
@@ -52,11 +52,11 @@ export default class BrowserLogger extends BaseLogger {
         case MODE.overlay:
           logEntry.innerHTML = this._overlayFormat(args, LEVEL.error);
           logEntry.setAttribute('style', `color: ${COLOR[LEVEL.error]}`);
+          this.overlay.appendChild(logEntry);
           break;
         default:
           throw new TypeError(`Invalid log mode for BrowserLogger: ${this.modeName}`);
       }
-      this.overlay.appendChild(logEntry);
     }
   }
 
@@ -70,11 +70,11 @@ export default class BrowserLogger extends BaseLogger {
         case MODE.overlay:
           logEntry.innerHTML = this._overlayFormat(args, LEVEL.info);
           logEntry.setAttribute('style', `color: ${COLOR[LEVEL.info]}`);
+          this.overlay.appendChild(logEntry);
           break;
         default:
           throw new TypeError(`Invalid log mode for BrowserLogger: ${this.modeName}`);
       }
-      this.overlay.appendChild(logEntry);
     }
   }
 
@@ -88,11 +88,11 @@ export default class BrowserLogger extends BaseLogger {
         case MODE.overlay:
           logEntry.innerHTML = this._overlayFormat(args, LEVEL.debug);
           logEntry.setAttribute('style', `color: ${COLOR[LEVEL.debug]}`);
+          this.overlay.appendChild(logEntry);
           break;
         default:
           throw new TypeError(`Invalid log mode for BrowserLogger: ${this.modeName}`);
       }
-      this.overlay.appendChild(logEntry);
     }
   }
 
