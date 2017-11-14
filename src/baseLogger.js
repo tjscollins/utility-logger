@@ -41,21 +41,18 @@ export default class BaseLogger {
    */
   _consoleFormat(data, level) {
     const timestamp = Date();
-    let logString;
+    const levelColor = this.colors[level];
+    const logString = `${timestamp}\n${data.reduce(this._stringify, '')}`;
 
     switch (level) {
       case LEVEL.error:
-        logString = colors[this.colors[LEVEL.error]](`ERROR: ${timestamp}\n${data.reduce(this._stringify, '')}`);
-        break;
+        return colors[levelColor](`ERROR: ${logString}`);
       case LEVEL.info:
-        logString = colors[this.colors[LEVEL.info]](`INFO: ${timestamp}\n${data.reduce(this._stringify, '')}`);
-        break;
+        return colors[levelColor](`INFO: ${logString}`);
       case LEVEL.debug:
-        logString = colors[this.colors[LEVEL.debug]](`DEBUG: ${timestamp}\n${data.reduce(this._stringify, '')}`);
-        break;
+        return colors[levelColor](`DEBUG: ${logString}`);
       case LEVEL.log:
-        logString = [`LOG: ${timestamp}\n${data.reduce(this._stringify, '')}`];
-        break;
+        return colors[levelColor](`LOG: ${logString}`);
       default:
         break;
     }
