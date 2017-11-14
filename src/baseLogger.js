@@ -1,5 +1,5 @@
 import colors from './colors';
-import { LEVEL, COLOR } from './constants';
+import { LEVEL, NODE_COLORS } from './constants';
 
 
 export default class BaseLogger {
@@ -7,6 +7,7 @@ export default class BaseLogger {
     if (Object.keys(LEVEL).indexOf(level) < 0) {
       throw new TypeError(`Invalid log level ${level}`);
     }
+    this.colors = NODE_COLORS;
     this.level = LEVEL[level];
   }
 
@@ -44,13 +45,13 @@ export default class BaseLogger {
 
     switch (level) {
       case LEVEL.error:
-        logString = colors[COLOR[LEVEL.error]](`ERROR: ${timestamp}\n${data.reduce(this._stringify, '')}`);
+        logString = colors[this.colors[LEVEL.error]](`ERROR: ${timestamp}\n${data.reduce(this._stringify, '')}`);
         break;
       case LEVEL.info:
-        logString = colors[COLOR[LEVEL.info]](`INFO: ${timestamp}\n${data.reduce(this._stringify, '')}`);
+        logString = colors[this.colors[LEVEL.info]](`INFO: ${timestamp}\n${data.reduce(this._stringify, '')}`);
         break;
       case LEVEL.debug:
-        logString = colors[COLOR[LEVEL.debug]](`DEBUG: ${timestamp}\n${data.reduce(this._stringify, '')}`);
+        logString = colors[this.colors[LEVEL.debug]](`DEBUG: ${timestamp}\n${data.reduce(this._stringify, '')}`);
         break;
       case LEVEL.log:
         logString = [`LOG: ${timestamp}\n${data.reduce(this._stringify, '')}`];

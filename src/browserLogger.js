@@ -1,7 +1,7 @@
 /* global document */
 import BaseLogger from './BaseLogger';
 
-import { LEVEL, COLOR, MODE, DEFAULT_BROWSER_OPTS } from './constants';
+import { LEVEL, BROWSER_COLORS, MODE, DEFAULT_BROWSER_OPTS } from './constants';
 
 export default class BrowserLogger extends BaseLogger {
   constructor(opts) {
@@ -12,6 +12,7 @@ export default class BrowserLogger extends BaseLogger {
       throw new TypeError(`Invalid log mode ${options.mode}`);
     }
 
+    this.colors = BROWSER_COLORS;
     this.modeName = options.mode;
     this.mode = MODE[this.modeName];
 

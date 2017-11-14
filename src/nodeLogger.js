@@ -1,7 +1,7 @@
 import fs from 'fs';
 
 import BaseLogger from './BaseLogger';
-import { LEVEL, MODE, DEFAULT_NODE_OPTS } from './constants';
+import { LEVEL, MODE, DEFAULT_NODE_OPTS, NODE_COLORS } from './constants';
 
 export default class nodeLogger extends BaseLogger {
   constructor(suppliedOptions) {
@@ -12,6 +12,7 @@ export default class nodeLogger extends BaseLogger {
       throw new TypeError(`Invalid log mode for NodeLogger ${options.modeName}`);
     }
 
+    this.colors = NODE_COLORS;
     this.modeName = options.mode;
     this.mode = MODE[this.modeName];
 
