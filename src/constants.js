@@ -26,16 +26,29 @@ export const MODE = Object.freeze({
 });
 
 /**
- * Enum for logging output colors
+ * Enum for logging output colors in node environemnt
  *
  * @readonly
  * @enum {number}
  */
-export const COLOR = Object.freeze({
+export const NODE_COLORS = Object.freeze({
   [LEVEL.log]: 'white',
   [LEVEL.error]: 'red',
   [LEVEL.info]: 'green',
   [LEVEL.debug]: 'magenta',
+});
+
+/**
+ * Enum for logging output colors in browser console
+ *
+ * @readonly
+ * @enum {number}
+ */
+export const BROWSER_COLORS = Object.freeze({
+  [LEVEL.log]: 'white',
+  [LEVEL.error]: 'red',
+  [LEVEL.info]: 'darkgreen',
+  [LEVEL.debug]: 'black',
 });
 
 
