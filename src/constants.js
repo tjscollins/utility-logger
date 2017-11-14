@@ -32,7 +32,7 @@ export const MODE = Object.freeze({
  * @enum {number}
  */
 export const NODE_COLORS = Object.freeze({
-  [LEVEL.log]: 'white',
+  [LEVEL.log]: 'default',
   [LEVEL.error]: 'red',
   [LEVEL.info]: 'green',
   [LEVEL.debug]: 'magenta',
@@ -45,7 +45,7 @@ export const NODE_COLORS = Object.freeze({
  * @enum {number}
  */
 export const BROWSER_COLORS = Object.freeze({
-  [LEVEL.log]: 'white',
+  [LEVEL.log]: 'default',
   [LEVEL.error]: 'red',
   [LEVEL.info]: 'darkgreen',
   [LEVEL.debug]: 'black',

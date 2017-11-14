@@ -29,6 +29,12 @@ class Colors {
 
   /* ----- Public Methods ----- */
 
+  /* eslint-disable class-methods-use-this */
+  default(string) {
+    return [string];
+  }
+  /* eslint-enable class-methods-use-this */
+
   red(string) {
     return (typeof window !== 'undefined')
       ? [`%c ${string}`, 'color: red']
