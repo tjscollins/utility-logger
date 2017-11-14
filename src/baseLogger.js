@@ -54,10 +54,8 @@ export default class BaseLogger {
       case LEVEL.log:
         return colors[levelColor](`LOG: ${logString}`);
       default:
-        break;
+        return [logString];
     }
-
-    return logString;
   }
 
   /**
