@@ -47,6 +47,12 @@ class Colors {
       : [this._fgGreen + string];
   }
 
+  darkgreen(string) {
+    return (typeof window !== 'undefined')
+      ? [`%c ${string}`, 'color: darkgreen']
+      : [this._fgGreen + string];
+  }
+
   white(string) {
     return (typeof window !== 'undefined')
       ? [`%c ${string}`, 'color: white']
@@ -57,6 +63,12 @@ class Colors {
     return (typeof window !== 'undefined')
       ? [`%c ${string}`, 'color: magenta']
       : [this._fgMagenta + string];
+  }
+
+  black(string) {
+    return (typeof window !== 'undefined')
+      ? [`%c ${string}`, 'color: black']
+      : [this._fgBlack + string];
   }
 }
 
