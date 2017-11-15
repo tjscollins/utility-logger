@@ -1,6 +1,11 @@
 import colors from './colors';
 import { LEVEL, NODE_COLORS } from './constants';
 
+/**
+ * @typedef {number} LOG_LEVEL
+ * @typedef {string} TEXT_COLOR
+ * @typedef {number} OUTPUT_MODE
+ */
 
 export default class BaseLogger {
   constructor({ level }) {
@@ -12,19 +17,19 @@ export default class BaseLogger {
   }
 
   log(...args) {
-    console.log(...this._consoleFormat(args, LEVEL.log));
+    console.log.apply(null, this._consoleFormat(args, LEVEL.log));
   }
 
   error(...args) {
-    console.error(...this._consoleFormat(args, LEVEL.error));
+    console.error.apply(null, this._consoleFormat(args, LEVEL.error));
   }
 
   info(...args) {
-    console.info(...this._consoleFormat(args, LEVEL.info));
+    console.info.apply(null, this._consoleFormat(args, LEVEL.info));
   }
 
   debug(...args) {
-    console.warn(...this._consoleFormat(args, LEVEL.debug));
+    console.warn.apply(null, this._consoleFormat(args, LEVEL.debug));
   }
 
 
@@ -34,9 +39,9 @@ export default class BaseLogger {
   /**
    * Format data into the correct string format based on log level
    *
-   * @param {any} data
-   * @param {LEVEL} level
-   * @returns
+   * @param {any[]} data
+   * @param {LOG_LEVEL} level
+   * @returns {string[]}
    * @memberof BaseLogger
    */
   _consoleFormat(data, level) {
