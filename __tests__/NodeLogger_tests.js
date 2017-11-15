@@ -62,7 +62,7 @@ function testLoggerMethod(level) {
       errorStub = sinon.stub(console, 'error');
       infoStub = sinon.stub(console, 'info');
       debugStub = sinon.stub(console, 'warn');
-      fsStub = sinon.stub(fs, 'appendFile');
+      fsStub = sinon.stub(fs, 'appendFileSync');
     });
 
     afterEach(() => {
@@ -88,11 +88,11 @@ function testLoggerMethod(level) {
       logger[level]('test');
       const consoleMethod = level === 'debug' ? 'warn' : level;
       expect(console[consoleMethod].calledOnce).toBe(true);
-      expect(fs.appendFile.calledOnce).toBe(false);
+      expect(fs.appendFileSync.calledOnce).toBe(false);
       logger.mode = MODE.file;
       logger[level]('test');
       expect(console[consoleMethod].calledOnce).toBe(true);
-      expect(fs.appendFile.calledOnce).toBe(true);
+      expect(fs.appendFileSync.calledOnce).toBe(true);
     });
   };
 }
