@@ -1,6 +1,6 @@
 {
   "name": "utility-logger",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A highly configurable logging utility for both nodejs and browser environments.  Allows logging to console, file (for node environment) or configurable DOM overlay (for browser).",
   "main": "dist/index.js",
   "scripts": {
@@ -18,10 +18,7 @@
     "type": "git",
     "url": "https://github.com/tjscollins/utility-logger.git"
   },
-  "dependencies": {
-    "chalk": "^2.3.0",
-    "colors": "^1.1.2"
-  },
+  "dependencies": {},
   "devDependencies": {
     "babel-jest": "^21.2.0",
     "babel-plugin-external-helpers": "^6.22.0",
@@ -50,6 +47,10 @@
     "coveragePathIgnorePatterns": [
       "/node_modules/",
       "/__tests__/"
+    ],
+    "testPathIgnorePatterns": [
+      "node_modules",
+      "__tests__/demo.js"
     ],
     "verbose": true
   }
