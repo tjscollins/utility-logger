@@ -6,17 +6,21 @@ import { LEVEL, MODE, DEFAULT_NODE_OPTS, NODE_COLORS } from './constants';
 export default class nodeLogger extends BaseLogger {
   constructor(suppliedOptions) {
     const options = Object.assign({}, DEFAULT_NODE_OPTS, suppliedOptions);
-    super(options);
 
     if (options.mode !== undefined && Object.keys(MODE).indexOf(options.mode) < 0) {
       throw new TypeError(`Invalid log mode for NodeLogger ${options.modeName}`);
     }
+
+    super(options);
 
     this.colors = NODE_COLORS;
     this.modeName = options.mode;
     this.mode = MODE[this.modeName];
 
     if (this.mode === MODE.file) {
+      if (!options.logFile) {
+        throw new TypeError('Invalid logFile undefined');
+      }
       this.logFile = options.logFile;
     }
   }
@@ -85,26 +89,19 @@ export default class nodeLogger extends BaseLogger {
 
   _fileFormat(data, level) {
     const timestamp = Date();
-    let logString;
+    const logString = `${timestamp}\n${data.reduce(this._stringify, '')}`;
 
     switch (level) {
       case LEVEL.error:
-        logString = `ERROR: ${timestamp}\n`;
-        break;
+        return `ERROR: ${timestamp}\n`;
       case LEVEL.info:
-        logString = `INFO: ${timestamp}\n`;
-        break;
+        return `INFO: ${timestamp}\n`;
       case LEVEL.debug:
-        logString = `DEBUG: ${timestamp}\n`;
-        break;
+        return `DEBUG: ${timestamp}\n`;
       case LEVEL.log:
-        logString = `LOG: ${timestamp}\n`;
-        break;
+        return `LOG: ${timestamp}\n`;
       default:
-        break;
+        return logString;
     }
-
-    logString += data.reduce(this._stringify, '');
-    return logString;
   }
 }
