@@ -1,9 +1,9 @@
 /* eslint-disable no-use-before-define */
-import colors from 'colors';
 import sinon from 'sinon';
 
 import BaseLogger from '../src/BaseLogger';
 import { LEVEL } from '../src/constants';
+import colors from '../src/colors';
 
 describe('BaseLogger', () => {
   it('should configure itself with supplied log level', () => {
@@ -33,22 +33,22 @@ describe('BaseLogger', () => {
   describe('BaseLogger._consoleFormat', () => {
     it('should format BaseLoggerr.log logging correctly', () => {
       const logger = new BaseLogger({ level: 'debug' });
-      expect(logger._consoleFormat(['test'], LEVEL.log)).toBe(colors.white(`LOG: ${Date()}\n\ttest\n\n`));
+      expect(logger._consoleFormat(['test'], LEVEL.log)).toEqual([`LOG: ${Date()}\n\ttest\n\n`]);
     });
 
     it('should format BaseLoggerr.error logging correctly', () => {
       const logger = new BaseLogger({ level: 'debug' });
-      expect(logger._consoleFormat(['test'], LEVEL.error)).toBe(colors.red(`ERROR: ${Date()}\n\ttest\n\n`));
+      expect(logger._consoleFormat(['test'], LEVEL.error)).toEqual(colors.red(`ERROR: ${Date()}\n\ttest\n\n`));
     });
 
     it('should format BaseLoggerr.info logging correctly', () => {
       const logger = new BaseLogger({ level: 'debug' });
-      expect(logger._consoleFormat(['test'], LEVEL.info)).toBe(colors.green(`INFO: ${Date()}\n\ttest\n\n`));
+      expect(logger._consoleFormat(['test'], LEVEL.info)).toEqual(colors.green(`INFO: ${Date()}\n\ttest\n\n`));
     });
 
     it('should format BaseLoggerr.debug logging correctly', () => {
       const logger = new BaseLogger({ level: 'debug' });
-      expect(logger._consoleFormat(['test'], LEVEL.debug)).toBe(colors.cyan(`DEBUG: ${Date()}\n\ttest\n\n`));
+      expect(logger._consoleFormat(['test'], LEVEL.debug)).toEqual(colors.magenta(`DEBUG: ${Date()}\n\ttest\n\n`));
     });
   });
 
