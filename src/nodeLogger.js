@@ -114,13 +114,13 @@ export default class NodeLogger extends BaseLogger {
 
     switch (level) {
       case LEVEL.error:
-        return `ERROR: ${timestamp}\n`;
+        return `ERROR: ${logString}`;
       case LEVEL.info:
-        return `INFO: ${timestamp}\n`;
+        return `INFO: ${logString}`;
       case LEVEL.debug:
-        return `DEBUG: ${timestamp}\n`;
+        return `DEBUG: ${logString}`;
       case LEVEL.log:
-        return `LOG: ${timestamp}\n`;
+        return `LOG: ${logString}`;
       default:
         return logString;
     }
