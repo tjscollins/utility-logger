@@ -1,9 +1,15 @@
+/**
+ * @typedef {number} LOG_LEVEL
+ * @typedef {string} TEXT_COLOR
+ * @typedef {number} OUTPUT_MODE
+ */
+
 
 /**
  * Enum for logging levels
  *
  * @readonly
- * @enum {number}
+ * @enum {LOG_LEVEL}
  */
 export const LEVEL = Object.freeze({
   quiet: 0,
@@ -17,7 +23,7 @@ export const LEVEL = Object.freeze({
  * Enum for logging output modes
  *
  * @readonly
- * @enum {number}
+ * @enum {OUTPUT_MODE}
  */
 export const MODE = Object.freeze({
   console: 0,
@@ -29,7 +35,7 @@ export const MODE = Object.freeze({
  * Enum for logging output colors in node environemnt
  *
  * @readonly
- * @enum {number}
+ * @enum {TEXT_COLOR}
  */
 export const NODE_COLORS = Object.freeze({
   [LEVEL.log]: 'default',
@@ -42,7 +48,7 @@ export const NODE_COLORS = Object.freeze({
  * Enum for logging output colors in browser console
  *
  * @readonly
- * @enum {number}
+ * @enum {TEXT_COLOR}
  */
 export const BROWSER_COLORS = Object.freeze({
   [LEVEL.log]: 'default',
