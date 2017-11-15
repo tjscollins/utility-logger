@@ -1,4 +1,3 @@
-import colors from 'colors';
 import sinon from 'sinon';
 
 import BrowserLogger from '../src/BrowserLogger';
