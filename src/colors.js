@@ -1,13 +1,5 @@
 class Colors {
   constructor() {
-    this._reset = '\x1b[0m';
-    this._bright = '\x1b[1m';
-    this._dim = '\x1b[2m';
-    this._underscore = '\x1b[4m';
-    this._blink = '\x1b[5m';
-    this._reverse = '\x1b[7m';
-    this._hidden = '\x1b[8m';
-
     this._fgBlack = '\x1b[30m';
     this._fgRed = '\x1b[31m';
     this._fgGreen = '\x1b[32m';
@@ -25,6 +17,14 @@ class Colors {
     this._bgMagenta = '\x1b[45m';
     this._bgCyan = '\x1b[46m';
     this._bgWhite = '\x1b[47m';
+
+    this._bright = '\x1b[1m';
+    this._dim = '\x1b[2m';
+    this._underscore = '\x1b[4m';
+    this._blink = '\x1b[5m';
+    this._reverse = '\x1b[7m';
+    this._hidden = '\x1b[8m';
+    this._reset = '\x1b[0m';
   }
 
   /* ----- Public Methods ----- */
