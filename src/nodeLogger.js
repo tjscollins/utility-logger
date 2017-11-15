@@ -3,7 +3,20 @@ import fs from 'fs';
 import BaseLogger from './BaseLogger';
 import { LEVEL, MODE, DEFAULT_NODE_OPTS, NODE_COLORS } from './constants';
 
-export default class nodeLogger extends BaseLogger {
+/**
+ * @typedef {number} LOG_LEVEL
+ * @typedef {string} TEXT_COLOR
+ * @typedef {number} OUTPUT_MODE
+ */
+
+/**
+ * Instantiate a logger configured to use a given log level and mode
+ *
+ * @export
+ * @class nodeLogger
+ * @extends {BaseLogger}
+ */
+export default class NodeLogger extends BaseLogger {
   constructor(suppliedOptions) {
     const options = Object.assign({}, DEFAULT_NODE_OPTS, suppliedOptions);
 
@@ -32,7 +45,7 @@ export default class nodeLogger extends BaseLogger {
           super.log(...args);
           break;
         case MODE.file:
-          fs.appendFile(this.logFile, this._fileFormat(args, LEVEL.log));
+          fs.appendFileSync(this.logFile, this._fileFormat(args, LEVEL.log));
           break;
         default:
           throw new TypeError(`Invalid log mode for NodeLogger ${this.modeName}`);
@@ -47,7 +60,7 @@ export default class nodeLogger extends BaseLogger {
           super.error(...args);
           break;
         case MODE.file:
-          fs.appendFile(this.logFile, this._fileFormat(args, LEVEL.error));
+          fs.appendFileSync(this.logFile, this._fileFormat(args, LEVEL.error));
           break;
         default:
           throw new TypeError(`Invalid log mode for NodeLogger ${this.modeName}`);
@@ -62,7 +75,7 @@ export default class nodeLogger extends BaseLogger {
           super.info(...args);
           break;
         case MODE.file:
-          fs.appendFile(this.logFile, this._fileFormat(args, LEVEL.info));
+          fs.appendFileSync(this.logFile, this._fileFormat(args, LEVEL.info));
           break;
         default:
           throw new TypeError(`Invalid log mode for NodeLogger ${this.modeName}`);
@@ -77,7 +90,7 @@ export default class nodeLogger extends BaseLogger {
           super.debug(...args);
           break;
         case MODE.file:
-          fs.appendFile(this.logFile, this._fileFormat(args, LEVEL.debug));
+          fs.appendFileSync(this.logFile, this._fileFormat(args, LEVEL.debug));
           break;
         default:
           throw new TypeError(`Invalid log mode for NodeLogger ${this.modeName}`);
@@ -87,6 +100,14 @@ export default class nodeLogger extends BaseLogger {
 
   /* --------Private Methods-------- */
 
+  /**
+  * Format a list of items into a string to be output to the log
+  *
+  * @param {any[]} data
+  * @param {LOG_LEVEL} level
+  * @returns {string}
+  * @memberof nodeLogger
+  */
   _fileFormat(data, level) {
     const timestamp = Date();
     const logString = `${timestamp}\n${data.reduce(this._stringify, '')}`;
