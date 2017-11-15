@@ -9,7 +9,7 @@ import { minify } from 'uglify-es';
 export default {
   // core input options
   input: 'src/index.js', // required
-  // external: ['colors'],
+  external: ['fs'],
   plugins: [
     resolve({
       jsnext: true,
