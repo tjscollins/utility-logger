@@ -34,7 +34,7 @@ export default class BrowserLogger extends BaseLogger {
           break;
         case MODE.overlay:
           logEntry.innerHTML = this._overlayFormat(args, LEVEL.log);
-          logEntry.setAttribute('style', `color: ${COLOR[LEVEL.log]}`);
+          logEntry.setAttribute('style', `color: ${this.colors[LEVEL.log]}`);
           this.overlay.appendChild(logEntry);
           break;
         default:
@@ -52,7 +52,7 @@ export default class BrowserLogger extends BaseLogger {
           break;
         case MODE.overlay:
           logEntry.innerHTML = this._overlayFormat(args, LEVEL.error);
-          logEntry.setAttribute('style', `color: ${COLOR[LEVEL.error]}`);
+          logEntry.setAttribute('style', `color: ${this.colors[LEVEL.error]}`);
           this.overlay.appendChild(logEntry);
           break;
         default:
@@ -70,7 +70,7 @@ export default class BrowserLogger extends BaseLogger {
           break;
         case MODE.overlay:
           logEntry.innerHTML = this._overlayFormat(args, LEVEL.info);
-          logEntry.setAttribute('style', `color: ${COLOR[LEVEL.info]}`);
+          logEntry.setAttribute('style', `color: ${this.colors[LEVEL.info]}`);
           this.overlay.appendChild(logEntry);
           break;
         default:
@@ -88,7 +88,7 @@ export default class BrowserLogger extends BaseLogger {
           break;
         case MODE.overlay:
           logEntry.innerHTML = this._overlayFormat(args, LEVEL.debug);
-          logEntry.setAttribute('style', `color: ${COLOR[LEVEL.debug]}`);
+          logEntry.setAttribute('style', `color: ${this.colors[LEVEL.debug]}`);
           this.overlay.appendChild(logEntry);
           break;
         default:
