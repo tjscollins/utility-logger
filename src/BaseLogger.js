@@ -32,7 +32,6 @@ export default class BaseLogger {
     console.warn.apply(null, this._consoleFormat(args, LEVEL.debug));
   }
 
-
   /* ------Private Methods-------- */
   /* eslint-disable class-methods-use-this */
 

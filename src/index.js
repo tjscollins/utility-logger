@@ -8,4 +8,4 @@ export default (function selectLogger() {
     return NodeLogger;
   }
   throw new Error('Unknown environment');
-}());
+})();

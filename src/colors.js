@@ -36,43 +36,43 @@ class Colors {
   /* eslint-enable class-methods-use-this */
 
   red(string) {
-    return (typeof window !== 'undefined')
+    return typeof window !== 'undefined'
       ? [`%c ${string}`, 'color: red']
       : [this._fgRed + string];
   }
 
   cyan(string) {
-    return (typeof window !== 'undefined')
+    return typeof window !== 'undefined'
       ? [`%c ${string}`, 'color: cyan']
       : [this._fgCyan + string];
   }
 
   green(string) {
-    return (typeof window !== 'undefined')
+    return typeof window !== 'undefined'
       ? [`%c ${string}`, 'color: green']
       : [this._fgGreen + string];
   }
 
   darkgreen(string) {
-    return (typeof window !== 'undefined')
+    return typeof window !== 'undefined'
       ? [`%c ${string}`, 'color: darkgreen']
       : [this._fgGreen + string];
   }
 
   white(string) {
-    return (typeof window !== 'undefined')
+    return typeof window !== 'undefined'
       ? [`%c ${string}`, 'color: white']
       : [this._fgWhite + string];
   }
 
   magenta(string) {
-    return (typeof window !== 'undefined')
+    return typeof window !== 'undefined'
       ? [`%c ${string}`, 'color: magenta']
       : [this._fgMagenta + string];
   }
 
   black(string) {
-    return (typeof window !== 'undefined')
+    return typeof window !== 'undefined'
       ? [`%c ${string}`, 'color: black']
       : [this._fgBlack + string];
   }

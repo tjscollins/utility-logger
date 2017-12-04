@@ -20,8 +20,13 @@ export default class NodeLogger extends BaseLogger {
   constructor(suppliedOptions) {
     const options = Object.assign({}, DEFAULT_NODE_OPTS, suppliedOptions);
 
-    if (options.mode !== undefined && Object.keys(MODE).indexOf(options.mode) < 0) {
-      throw new TypeError(`Invalid log mode for NodeLogger ${options.modeName}`);
+    if (
+      options.mode !== undefined &&
+      Object.keys(MODE).indexOf(options.mode) < 0
+    ) {
+      throw new TypeError(
+        `Invalid log mode for NodeLogger ${options.modeName}`
+      );
     }
 
     super(options);
@@ -48,7 +53,9 @@ export default class NodeLogger extends BaseLogger {
           fs.appendFileSync(this.logFile, this._fileFormat(args, LEVEL.log));
           break;
         default:
-          throw new TypeError(`Invalid log mode for NodeLogger ${this.modeName}`);
+          throw new TypeError(
+            `Invalid log mode for NodeLogger ${this.modeName}`
+          );
       }
     }
   }
@@ -63,7 +70,9 @@ export default class NodeLogger extends BaseLogger {
           fs.appendFileSync(this.logFile, this._fileFormat(args, LEVEL.error));
           break;
         default:
-          throw new TypeError(`Invalid log mode for NodeLogger ${this.modeName}`);
+          throw new TypeError(
+            `Invalid log mode for NodeLogger ${this.modeName}`
+          );
       }
     }
   }
@@ -78,7 +87,9 @@ export default class NodeLogger extends BaseLogger {
           fs.appendFileSync(this.logFile, this._fileFormat(args, LEVEL.info));
           break;
         default:
-          throw new TypeError(`Invalid log mode for NodeLogger ${this.modeName}`);
+          throw new TypeError(
+            `Invalid log mode for NodeLogger ${this.modeName}`
+          );
       }
     }
   }
@@ -93,7 +104,9 @@ export default class NodeLogger extends BaseLogger {
           fs.appendFileSync(this.logFile, this._fileFormat(args, LEVEL.debug));
           break;
         default:
-          throw new TypeError(`Invalid log mode for NodeLogger ${this.modeName}`);
+          throw new TypeError(
+            `Invalid log mode for NodeLogger ${this.modeName}`
+          );
       }
     }
   }
@@ -101,13 +114,13 @@ export default class NodeLogger extends BaseLogger {
   /* --------Private Methods-------- */
 
   /**
-  * Format a list of items into a string to be output to the log
-  *
-  * @param {any[]} data
-  * @param {LOG_LEVEL} level
-  * @returns {string}
-  * @memberof nodeLogger
-  */
+   * Format a list of items into a string to be output to the log
+   *
+   * @param {any[]} data
+   * @param {LOG_LEVEL} level
+   * @returns {string}
+   * @memberof nodeLogger
+   */
   _fileFormat(data, level) {
     const timestamp = Date();
     const logString = `${timestamp}\n${data.reduce(this._stringify, '')}`;
