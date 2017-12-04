@@ -1,6 +1,5 @@
 /* eslint-disable no-use-before-define */
 import sinon from 'sinon';
-import fs from 'fs';
 
 import BrowserLogger from '../src/BrowserLogger';
 import { LEVEL, MODE } from '../src/constants';
